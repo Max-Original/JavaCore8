@@ -122,14 +122,7 @@ public class Aplication {
 				sc = new Scanner(System.in);
 				int num = sc.nextInt();
 
-				boolean flag = false;
-
-				for (months m : mas) {
-					if (m.getDays() > num) {
-						flag = true;
-						System.out.println(m);
-					}
-				}
+				boolean flag = moreDays(mas, num);
 				if (!flag) {
 					System.out.println("month with " + num + " days doesnt exist");
 				}
@@ -140,14 +133,7 @@ public class Aplication {
 				sc = new Scanner(System.in);
 				String seasons = sc.next().toUpperCase();
 
-				boolean flag = false;
-
-				for (Seasons s : mass) {
-					if (s.name().equals(seasons)) {
-						System.out.println("Season exists");
-						flag = true;
-					}
-				}
+				boolean flag = nextSeason(mass, seasons);
 				if (flag) {
 					Seasons se2 = Seasons.valueOf(seasons);
 					int ordinal = se2.ordinal();
@@ -169,28 +155,7 @@ public class Aplication {
 				sc = new Scanner(System.in);
 				String seasons = sc.next().toUpperCase();
 
-				boolean flag = false;
-
-				for (Seasons s : mass) {
-					if (s.name().equals(seasons)) {
-						System.out.println("Season exists");
-						flag = true;
-					}
-				}
-				if (flag) {
-					Seasons se2 = Seasons.valueOf(seasons);
-					int ordinal = se2.ordinal();
-
-					if (se2.ordinal() == (mass.length - 1)) {
-						ordinal = 2;
-						System.out.println(mass[ordinal]);
-					} else if (se2.ordinal() == 0) {
-						ordinal = mass.length - 1;
-						System.out.println(mass[ordinal]);
-					} else {
-						System.out.println(mass[ordinal - 1]);
-					}
-				}
+				boolean flag = previousSeason(mass, seasons);
 				if (!flag) {
 					System.out.println("Season " + seasons + " Doesnt exist");
 				}
@@ -241,6 +206,56 @@ public class Aplication {
 			}
 			}
 		}
+	}
+
+	private static boolean previousSeason(Seasons[] mass, String seasons) {
+		boolean flag = false;
+
+		for (Seasons s : mass) {
+			if (s.name().equals(seasons)) {
+				System.out.println("Season exists");
+				flag = true;
+			}
+		}
+		if (flag) {
+			Seasons se2 = Seasons.valueOf(seasons);
+			int ordinal = se2.ordinal();
+
+			if (se2.ordinal() == (mass.length - 1)) {
+				ordinal = 2;
+				System.out.println(mass[ordinal]);
+			} else if (se2.ordinal() == 0) {
+				ordinal = mass.length - 1;
+				System.out.println(mass[ordinal]);
+			} else {
+				System.out.println(mass[ordinal - 1]);
+			}
+		}
+		return flag;
+	}
+
+	private static boolean nextSeason(Seasons[] mass, String seasons) {
+		boolean flag = false;
+
+		for (Seasons s : mass) {
+			if (s.name().equals(seasons)) {
+				System.out.println("Season exists");
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	private static boolean moreDays(months[] mas, int num) {
+		boolean flag = false;
+
+		for (months m : mas) {
+			if (m.getDays() > num) {
+				flag = true;
+				System.out.println(m);
+			}
+		}
+		return flag;
 	}
 	
 	private static boolean lessDays(months[] mas, int num) {
