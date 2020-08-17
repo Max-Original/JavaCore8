@@ -59,7 +59,7 @@ public class Aplication {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws WrongInputConsoleParametersException {
 
 		months[] mas = months.values();
 		Seasons[] mass = Seasons.values();
@@ -78,6 +78,8 @@ public class Aplication {
 				if (!flag) {
 					System.out.println("Month doesnt exit");
 				}
+				 
+				 
 				break;
 			}
 			case "2": {
@@ -109,19 +111,26 @@ public class Aplication {
 				System.out.println("Enter number of Days");
 				sc = new Scanner(System.in);
 				int num = sc.nextInt();
-
-				boolean flag = lessDays(mas, num);
-
-				if (!flag) {
-					System.out.println("month with " + num + " days doesnt exist");
+				
+				if (num > 33) {
+					throw new WrongInputConsoleParametersException("month with "+ num +  " days doesnt exist");
 				}
-				break;
+				
+				boolean flag = lessDays(mas, num);
+				
+				  if (!flag) { System.out.println("month with " + num + " days doesnt exist");
+				  } break;
+				 
 			}
 			case "5": {
 				System.out.println("Enter number of Days");
 				sc = new Scanner(System.in);
 				int num = sc.nextInt();
-
+				
+				if (num < 28) {
+					throw new WrongInputConsoleParametersException("month with "+ num +  " days doesnt exist");
+				}
+				
 				boolean flag = moreDays(mas, num);
 				if (!flag) {
 					System.out.println("month with " + num + " days doesnt exist");
