@@ -1,16 +1,17 @@
 package javacore8;
-
+/*
+ * importing java.util.Scanner gave us the opportunity to input data from the console.
+ */
 import java.io.ObjectInputStream.GetField;
 import java.util.Scanner;
 
 public class Aplication {
 
-
 	enum Seasons {
 
 		WINTER, SUMMER, SPRING, AUTUMN;
 	}
-
+//inserted month information in to enum months
 	enum months {
 
 		JANUARY(31, Seasons.WINTER),
@@ -28,13 +29,14 @@ public class Aplication {
 
 		Integer days;
 		Seasons s;
-
+		
+//months constructor
+		
 		months(Integer days, Seasons s) {
 			this.days = days;
 			this.s = s;
 		}
-		
-
+// getters for variable days, s	
 		public Integer getDays() {
 			return days;
 		}
@@ -43,7 +45,7 @@ public class Aplication {
 			return s;
 		}
 	}
-
+// Created to display menu on the console
 	static void menu() {
 
 		System.out.println("Ќатисн≥ть 1 щоб перев≥рити на€вн≥сть м≥с€ц€ ");
@@ -60,16 +62,25 @@ public class Aplication {
 	}
 
 	public static void main(String[] args) throws WrongInputConsoleParametersException {
-
+		
+// created two arrays to have access to data inside the enums
+		
 		months[] mas = months.values();
 		Seasons[] mass = Seasons.values();
-
+		
+//created a scanner sc for use in reading data from the console
+		
 		Scanner sc = new Scanner(System.in);
-
+		
+//cycle while runs the menu in the console
+		
 		while (true) {
 			menu();
 			switch (sc.next()) {
 			case "1": {
+				
+//in the first case we get the data from the console and check if it equals data in enum months
+				
 				System.out.println("Enter month");
 				sc = new Scanner(System.in);
 				String months = sc.next().toUpperCase();
@@ -78,11 +89,12 @@ public class Aplication {
 				if (!flag) {
 					System.out.println("Month doesnt exit");
 				}
-				 
-				 
 				break;
 			}
 			case "2": {
+				
+// the second case checks for matches and outputs all data from one group of seasons				
+				
 				System.out.println("Enter Season");
 				sc = new Scanner(System.in);
 				String Season = sc.next().toUpperCase();
@@ -95,6 +107,8 @@ public class Aplication {
 				break;
 			}
 
+//reads data from the console and checks for matches, and displays them.
+			
 			case "3": {
 				System.out.println("Enter number of Days");
 				sc = new Scanner(System.in);
@@ -107,6 +121,9 @@ public class Aplication {
 				break;
 
 			}
+			
+// reads data from the console and compares them with data from enum, outputs those that have smaller values.			
+			
 			case "4": {
 				System.out.println("Enter number of Days");
 				sc = new Scanner(System.in);
@@ -122,6 +139,9 @@ public class Aplication {
 				  } break;
 				 
 			}
+			
+// reads data from the console and compares them with data from enum, outputs those that have bigger values.			
+
 			case "5": {
 				System.out.println("Enter number of Days");
 				sc = new Scanner(System.in);
@@ -138,6 +158,9 @@ public class Aplication {
 				break;
 			}
 			case "6": {
+				
+//reads data from the console and compares them with enums data, outputs next value.				
+				
 				System.out.println("Enter Season");
 				sc = new Scanner(System.in);
 				String seasons = sc.next().toUpperCase();
@@ -160,6 +183,9 @@ public class Aplication {
 				break;
 			}
 			case "7": {
+				
+//reads data from the console and compares them with enums data, outputs previous value.
+				
 				System.out.println("Enter Season");
 				sc = new Scanner(System.in);
 				String seasons = sc.next().toUpperCase();
@@ -171,6 +197,9 @@ public class Aplication {
 				break;
 			}
 			case "8": {
+				
+//runs through the array and checks if there is an even amount of data if so it outputs them to the console
+				
 				for (months m : mas) {
 					if (m.getDays() % 2 == 0) {
 						System.out.println(m);
@@ -179,6 +208,9 @@ public class Aplication {
 				break;
 			}
 			case "9": {
+				
+//runs through the array and checks if there is an not even amount of data if so it outputs them to the console				
+				
 				for (months m : mas) {
 					if (m.getDays() % 2 == 1) {
 						System.out.println(m);
@@ -187,6 +219,9 @@ public class Aplication {
 				break;
 			}
 			case "10": {
+				
+//reads data from the console if such data exists checks whether there is an even amount of data and displays the result
+				
 				System.out.println("Enter month");
 				sc = new Scanner(System.in);
 				String month = sc.next().toUpperCase();
@@ -217,6 +252,8 @@ public class Aplication {
 		}
 	}
 
+// 	checks for the presence month if it exists displays the next one.
+	
 	private static boolean previousSeason(Seasons[] mass, String seasons) {
 		boolean flag = false;
 
@@ -243,6 +280,8 @@ public class Aplication {
 		return flag;
 	}
 
+//	checks for the presence season if it exists displays the next one.
+	
 	private static boolean nextSeason(Seasons[] mass, String seasons) {
 		boolean flag = false;
 
@@ -255,6 +294,8 @@ public class Aplication {
 		return flag;
 	}
 
+//  checks the presence of the month if it exists displays the months with more days
+	
 	private static boolean moreDays(months[] mas, int num) {
 		boolean flag = false;
 
@@ -266,6 +307,8 @@ public class Aplication {
 		}
 		return flag;
 	}
+	
+//	checks the presence of the month if it exists displays the months with less days
 	
 	private static boolean lessDays(months[] mas, int num) {
 		boolean flag = false;
@@ -279,6 +322,8 @@ public class Aplication {
 		return flag;
 	}
 
+// checks for the same number of days if it matches displays to the console
+	
 	private static boolean sameDaysInMonth(months[] mas, int num) {
 		boolean flag = false;
 
@@ -291,7 +336,8 @@ public class Aplication {
 		return flag;
 	}
 	
-
+//  checks for the presence of a season if it exists displays all months of one season
+	
 	private static boolean sameSeason(months[] mas, String Season) {
 		boolean flag = false;
 
@@ -312,6 +358,8 @@ public class Aplication {
 		return flag;
 	}
 
+//	checks if month exists 
+	
 	private static boolean checkForMonth(months[] mas, String months) {
 		boolean flag = false;
 
